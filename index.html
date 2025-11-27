@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoatHash</title>
+    <meta name="description" content="Lightning-fast client-side key-value lookup">
+    <link rel="icon" type="image/svg+xml" href="goat.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light-mode">
+    <div class="background-gradient"></div>
+
+    <!-- Theme Toggle - Fixed Bottom Right -->
+    <div class="theme-toggle">
+        <button class="theme-btn active" data-theme="light" title="Light mode">🔦</button>
+        <button class="theme-btn" data-theme="dark" title="Dark mode">🌃</button>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <!-- Header content removed as per user's edit -->
+        </header>
+
+        <main class="search-card">
+            <div class="search-header">
+                <h2>GoatHash</h2>
+                <p>Lightning-fast lookup across <span id="totalKeysHeader">28.6M</span> records</p>
+            </div>
+
+            <div class="search-container">
+                <div class="input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Paste Your MD5 or NTLM Hash Here" maxlength="64"
+                        autocomplete="off" spellcheck="false">
+                </div>
+
+                <button class="search-button" id="searchButton">
+                    <span class="button-text">Search</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+
+            <div id="resultContainer" class="result-container hidden">
+                <div class="result-header">
+                    <span class="result-label">Result</span>
+                    <button class="copy-button" id="copyButton" title="Copy to clipboard">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="resultValue" class="result-value"></div>
+                <div id="resultStats" class="result-stats"></div>
+            </div>
+
+            <div id="errorContainer" class="error-container hidden">
+                <div class="error-icon">⚠️</div>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+
+            <div id="loadingContainer" class="loading-container hidden">
+                <div class="loading-spinner"></div>
+                <div class="loading-text" id="loadingSteps">Searching...</div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <a href="https://www.linkedin.com/in/encoded1/" class="footer-link" target="www.linkedin.com/in/encoded1" title="LinkedIn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                    </path>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com" class="footer-link" target="_blank" title="GitHub">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.603-3.369-1.343-3.369-1.343-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.547 2.914 1.186.092-.923.35-1.546.636-1.903-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.14 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z">
+                    </path>
+                </svg>
+                GitHub
+            </a>
+            <a href="https://blog.example.com" class="footer-link" target="_blank" title="Blog">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54h2.92v2.12h-3.5v-3.92l-.82 1.03h-1.26l3.01-3.93-3.01-3.92h1.26l.82 1.03v-3.93h3.5v2.12h-2.92l2.75 3.54z">
+                    </path>
+                </svg>
+                Blog
+            </a>
+            <a href="about.html" class="footer-link" target="_blank" title="About GoatHash">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+                    </path>
+                </svg>
+                About GoatHash
+            </a>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeButtons = document.querySelectorAll('.theme-btn');
+
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                document.body.className = `${theme}-mode`;
+
+                themeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Save preference
+                localStorage.setItem('theme', theme);
+            });
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.className = `${savedTheme}-mode`;
+        themeButtons.forEach(btn => {
+            if (btn.getAttribute('data-theme') === savedTheme) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+
+</html>

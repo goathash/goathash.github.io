@@ -1,0 +1,16 @@
+{
+  "total_keys": 28600494,
+  "total_chunks": 2860,
+  "strategy": "hash_sharding",
+  "hash_algo": "fnv1a_32",
+  "hash_types": [
+    "md5",
+    "ntlm"
+  ],
+  "stats": {
+    "max_chunk_size": 10404,
+    "min_chunk_size": 9653,
+    "avg_chunk_size": 10000,
+    "empty_chunks": 0
+  }
+}
