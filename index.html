@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wayfarer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Wayfarer</h1>
+    <span class="tag">real Pune roads &middot; snap-to-road fastest route with simulated live traffic</span>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="group">
+        <h2>Directions</h2>
+        <div class="field">
+          <input type="text" id="from-input" placeholder="From — e.g. Kothrud" autocomplete="off" />
+          <ul id="from-list" class="suggest" hidden></ul>
+        </div>
+        <div class="field">
+          <input type="text" id="to-input" placeholder="To — e.g. Deccan" autocomplete="off" />
+          <ul id="to-list" class="suggest" hidden></ul>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>Map</h2>
+        <div id="mapmeta" class="hint">Loading…</div>
+        <div class="row" style="margin-top:10px">
+          <button id="btn-traffic">Randomize traffic</button>
+          <button id="btn-clear">Clear A/B</button>
+        </div>
+        <div class="row">
+          <button id="btn-reset">Reset traffic</button>
+          <button id="btn-resetview">Reset view</button>
+        </div>
+        <div class="hint" style="margin-top:8px">Scroll to zoom &middot; drag to pan &middot; click to set A/B &middot; double-click resets view</div>
+      </div>
+
+      <div class="group">
+        <h2>Layers</h2>
+        <label class="check"><input type="checkbox" id="chk-animate" checked /> Animate traffic</label>
+        <label class="check"><input type="checkbox" id="chk-cars" checked /> Cars</label>
+        <label class="check"><input type="checkbox" id="chk-signals" checked /> Traffic signals</label>
+        <label class="check"><input type="checkbox" id="chk-overlay" /> Traffic heat on roads</label>
+        <label class="check"><input type="checkbox" id="chk-compare" checked /> Compare shortest distance</label>
+        <label class="check"><input type="checkbox" id="chk-reroute" checked /> Live re-route (reacts to traffic)</label>
+      </div>
+
+      <div class="group">
+        <h2>Route</h2>
+        <div id="info"></div>
+      </div>
+
+      <div class="group legend">
+        <h2>Legend</h2>
+        <div><span style="color:#1a73e8">&#9679;</span> fastest &nbsp; <span style="color:#7c4dff">&#9679;</span> shortest</div>
+        <div style="margin-top:4px"><span style="color:#34a853">&#9679;</span>/<span style="color:#ea4335">&#9679;</span> signal (green/red)</div>
+        <div style="margin-top:8px">Cars by speed</div>
+        <div class="bar"></div>
+        <div class="ends"><span>slow</span><span>fast</span></div>
+      </div>
+    </aside>
+
+    <main class="map-wrap"><canvas id="map"></canvas></main>
+  </div>
+
+  <script src="src/graph.js"></script>
+  <script src="src/pathfinding.js"></script>
+  <script src="src/render.js"></script>
+  <script src="src/traffic.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
